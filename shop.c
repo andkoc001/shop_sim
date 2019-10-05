@@ -43,6 +43,21 @@ struct Customer
 };
 
 // ----- ----- -----
+// Methods
+
+// Printing product info
+void printProduct(struct Product prod) // This method requires a struct 'Product', named localy within the method as 'prod'. The method does not return anything.
+{
+  printf("Product Name: %s \nProduct Price: €%.2f \n-----\n", prod.name, prod.price); // Values of prod.name and prod.price are referring to product's properties defined the strut instance (within 'Main' method).
+}
+
+// Printing customer info
+void printCustomer(struct Customer cust) // This method requires a struct 'Customer', named localy within the method as 'cust'. The method does not return anything.
+{
+  printf("Customer Name: %s \nCustomer Budget: €%.2f \n-----\n", cust.name, cust.budget); // Values of cust.name and cust.budget are referring to customer's details defined the strut instance (within 'Main' method).
+}
+
+// ----- ----- -----
 // Main program body
 
 int main(void) // The 'main' function is of 'int' type, and does not return anything.
@@ -50,12 +65,14 @@ int main(void) // The 'main' function is of 'int' type, and does not return anyt
   // Initialisation of a customer. Note, only two of three variables are being defined here. 'shoppingList has already a value predefined in the moment of cration.
   struct Customer customer1 = {"Andrzej", 123.45}; // Andrzej with budget 123.45 has been assigned to instance 'customer1' of 'Customer' class.
   printf("\n");
-  printf("Customer name is %s. His/her current budget is €%.2f.\n", customer1.name, customer1.budget); // This line is used as a check.
+  // printf("Customer name is %s. His/her current budget is €%.2f.\n", customer1.name, customer1.budget); // This line is used as a check.
+  printCustomer(customer1);
 
   // Initialisation of a prodct.
   struct Product prod1 = {"SoftDrink Can", 0.85}; // Product's name and price assigned to instance 'prod1' of 'Product' class.
   printf("\n");
-  printf("This is %s. One item costs €%.2f.\n", prod1.name, prod1.price); // This line is used as a check.
+  // printf("This is %s. One item costs €%.2f.\n", prod1.name, prod1.price); // This line is used as a check.
+  printProduct(prod1);
 
   // Initialisation of a prodct stock available amount.
   struct ProductStock prod1Stock = {prod1, 134}; // Product's refernce to 'prod1' (of 'Product' struct) and available amount.
