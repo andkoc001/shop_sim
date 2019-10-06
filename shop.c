@@ -72,7 +72,7 @@ void printCustomer(struct Customer cust) // This method requires a struct 'Custo
 // Reading data from a file line by line and converts into a variable (product stock) and add to struct that represents the shop.
 struct Shop createAndStockShop() // The type has been later changed from "Void" to "struct Shop".
 {
-  struct Shop shop = {200}; // This struct represents shop - what products are in stock. 200 is the shop cash
+  struct Shop shop = {222}; // This struct represents shop - what products are in stock. 200 is the shop cash
 
   // based on https://stackoverflow.com/a/3501681
   FILE *fp;
@@ -100,8 +100,8 @@ struct Shop createAndStockShop() // The type has been later changed from "Void" 
     double price = atof(pri);
     struct Product product = {name, price};
     struct ProductStock stockItem = {product, quantity};
-    shop.stock[shop.index++] = stockItem;                                      // The above data extracted from file will be added to shop stock of struct "Shop".
-    printf("Product: %s, €%.2f; available: %d pcs.\n", name, price, quantity); // Commented out as replaced by a dedicated method "printShop" below.
+    shop.stock[shop.index++] = stockItem; // The above data extracted from file will be added to shop stock of struct "Shop".
+    // printf("Product: %s, €%.2f; available: %d pcs.\n", name, price, quantity); // Commented out as replaced by a dedicated method "printShop" below.
   }
 
   fclose(fp);
@@ -111,6 +111,21 @@ struct Shop createAndStockShop() // The type has been later changed from "Void" 
   // exit(EXIT_SUCCESS);
 
   return shop;
+}
+
+// Method to create a print out. It takes "struct Shop" as a parameter.
+void printShop(struct Shop sh)
+{
+  printf("=====\n");
+  printf("Shop has %.2f in cash\n", sh.cash);
+  printf("=====\n");
+  for (int i = 0; i < sh.index; i++)
+  {
+    printProduct(sh.stock[i].product);
+    printf("The shop has %d of the above\n", sh.stock[i].quantity);
+    printf("-----\n");
+  }
+  printf("=====\n");
 }
 
 // ----- ----- -----
@@ -145,7 +160,7 @@ int main(void) // The 'main' function is of 'int' type, and does not return anyt
   printCustomer(customer1);
   */
 
-  createAndStockShop(); // This method will read data from a file.
-
+  struct Shop shop = createAndStockShop(); // This method will read data from a file.
+  printShop(shop);
   return 0;
 }
